@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приклад бібліотеки</title>
+    <!-- Підключення шрифтів Roboto та Lora з Google Fonts (як передбачалося в CSS) -->
+    <link href="fonts.googleapis.com" rel="stylesheet">
+    <style>
+        /* Весь CSS-код, який ви надали раніше, вставлено сюди */
+        body {
+            margin: 0;              /* обнулення зовнішніх відступів */
+            font-family: 'Roboto', sans-serif; /* шрифт Roboto */
+            color: #333;           /* колір тексту */
+            background-color: #eaeaea; /* колір фону */
+            font-size: 16px;       /* розмір тексту */
+        }
+        .section-main {
+            background-color: #556b2f; /* колір фону */
+            padding-top: 40px;         /* внутрішній відступ зверху */
+            padding-bottom: 120px;     /* внутрішній відступ знизу */
+            
+            display: flex;             /* вирівнюємо дочірні елементи */
+            flex-direction: column;    /* в стовпець */
+            align-items: center;       /* по центру */
+        }
+
+        /* Логотип */
+        .section-main img {
+            width: 160px;
+        }
+
+        /* Заголовок */
+        .section-main-title {
+            margin-top: 40px;       /* зовнішній відступ зверху */
+            margin-bottom: 20px;    /* зовнішній відступ знизу */
+            color: #fff;            /* колір тексту */
+            font-family: 'Lora', serif; 
+            font-size: 55px;        /* розмір тексту */
+            font-weight: 700;       /* напівжирний шрифт */
+        }
+
+        /* Підзаголовок */
+        .section-main-subtitle {
+            margin-bottom: 40px;    /* зовнішній відступ знизу */
+            color: #fff;            /* колір тексту */
+            font-size: 22px;        /* розмір тексту */
+        }
+
+        /* Кнопка */
+        .section-main-button {
+            background-color: #8fbc8f;  /* колір фону */
+            border: none;               /* без рамки */
+            border-radius: 25px;        /* округлення */
+            color: #fff;                /* колір тексту */
+            font-weight: 700;           /* напівжирний шрифт */
+            text-transform: uppercase;  /* всі літери великі */
+            padding: 12px 30px;         /* внутрішні відступи */
+            cursor: pointer;            /* курсор при наведенні */
+        }
+        /* Стилізація секції second-section */
+        .second-section {
+            display: flex;
+            justify-content: space-between; /* пропуски між елементами */
+            align-items: center; /* по центру по вертикалі */
+            padding: 100px 0; /* відступи зверху і знизу */
+            max-width: 1200px; /* Обмежуємо ширину контенту */
+            margin: 0 auto; /* Центруємо контент */
+        }
+
+        /* Зображення */
+        .second-section img {
+            width: 500px;
+            border: 5px solid #556b2f;
+            border-radius: 20px;
+        }
+
+        /* Блок з текстовою інформацією */
+        .second-section-info {
+            margin-left: 30px;
+            max-width: 600px;
+        }
+
+        /* Підзаголовок */
+        .section-subtitle {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #8fbc8f;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase; /* всі літери великі */
+        }
+
+        /* Заголовок */
+        .section-title {
+            margin-top: 0;
+            margin-bottom: 40px;
+            color: #556b2f;
+            font-size: 32px;
+            /* font-weig - тут ваш CSS був обрізаний, тому я додам стандартний font-weight */
+            font-weight: 700;
+        }
+        /* Стилізація основної секції */
+        .third-section {
+            display: flex;
+            flex-direction: column; /* в стовпець */
+            align-items: center; /* по центру */
+            background-color: #f5f5f5;
+            padding: 100px 0; /* зверху і знизу */
+        }
+
+        /* Контейнер з книгами */
+        .third-section-books {
+            display: flex;
+            justify-content: center; /* по центру горизонтально */
+            align-items: center;     /* по центру вертикалі */
+            flex-wrap: wrap;         /* перенесення елементів */
+            margin-top: 50px;
+            max-width: 1200px; /* Обмежуємо ширину контенту */
+        }
+
+        /* Окремий блок книги */
+        .third-section-book {
+            display: flex;
+            flex-direction: column; /* в стовпець */
+            align-items: center;    /* по центру */
+            margin: 10px 20px;      /* зверху/знизу 10px, зліва/справа 20px */
+            text-align: center;
+        }
+
+        /* Зображення книги */
+        .book-img {
+            height: 200px;
+            width: auto; /* Додано, щоб зображення масштабувалися пропорційно */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Додамо тінь для кращого вигляду */
+        }
+
+        /* Назва книги */
+        .book-title {
+            margin-top: 10px;
+            margin-bottom: 5px;
+            color: #556b2f;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        /* Автор книги */
+        .book-author {
+            margin: 2px 0; /* зверху і знизу 2рх */
+            color: #666;
+        }
+
+        /* Ціна книги */
+        .book-price {
+            margin: 0; /* обнулення зовнішніх відступів */
+            color: #8fbc8f;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        /* Стилізація секції footer */
+        .footer {
+            display: flex;
+            flex-direction: column; /* в стовпець */
+            align-items: center;    /* по центру */
+            background-color: #2f4f4f;
+            padding: 100px 0; /* зверху і знизу */
+        }
+
+        /* Заголовок футера */
+        .footer-title {
+            color: #fff;
+        }
+
+        /* Текст футера */
+        .footer-text {
+            width: 600px;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #8fbc8f;
+            font-size: 20px;
+        }
+
+        .footer-text-main {
+            color: #fff;
+        }
+
+        /* Форма */
+        .footer-form {
+            display: flex;
+            flex-direction: column; /* в стовпець */
+            align-items: center;    /* по центру */
+        }
+
+        /* Заголовок форми */
+        .form-title {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            text-align: center;
+            color: #fff;
+            font-weight: 600;
+            text-transform: uppercase; /* всі літери великі */
+        }
+
+        /* Поля вводу */
+        .form-input {
+            width: 400px;
+            height: 40px;
+            margin-bottom: 10px;
+            padding: 0 10px; /* зверху/знизу 0, зліва/справа 10px */
+            background-color: #2f4f4f;
+            color: #fff;
+            border: 1px solid #fff;
+            border-radius: 8px;
+        }
+
+        /* Кнопка */
+        .footer-button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #8fbc8f;
+            color: #fff;
+            font-weight: 600;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer; /* курсор – палець */
+        }
+
+        /* Ефект при наведенні */
+        .footer-button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Секція Main -->
+    <section class="section-main">
+        <!-- Тут можна використати Biblioteka.jpg як логотип, якщо він підходить -->
+        <img src="Biblioteka.jpg" alt="Логотип Бібліотеки">
+        <h1 class="section-main-title">Ласкаво просимо до нашої бібліотеки</h1>
+        <p class="section-main-subtitle">Найкращі книги для вашого розвитку</p>
+        <button class="section-main-button">Переглянути книги</button>
+    </section>
+
+    <!-- Секція About (second-section) -->
+    <section class="second-section">
+        <!-- Використовуємо Biblioteka.jpg як основне зображення секції -->
+        <img src="Biblioteka.jpg" alt="Зображення бібліотеки">
+        <div class="second-section-info">
+            <p class="section-subtitle">Про нас</p>
+            <h2 class="section-title">Ми любимо читати</h2>
+            <p>Тут ви можете додати більше інформації про вашу бібліотеку або магазин. Це чудовий простір для опису ваших послуг, місії або просто для додавання цікавого тексту.</p>
+        </div>
+    </section>
+
+    <!-- Секція Книг (third-section) -->
+    <section class="third-section">
+        <h2 class="section-title">Наші популярні книги</h2>
+        <div class="third-section-books">
+            
+            <!-- Книга 1 -->
+            <div class="third-section-book">
+                <img src="Book1.jpg" alt="Обкладинка книги 1" class="book-img">
+                <p class="book-title">Ромео і Джульєтта</p>
+                <p class="book-author">Вільям Шекспір</p>
+                <p class="book-price">250 грн</p>
+            </div>
+
+            <!-- Книга 2 -->
+            <div class="third-section-book">
+                <img src="Book2.jpg" alt="Обкладинка книги 2" class="book-img">
+                <p class="book-title">Лісова пісня</p>
+                <p class="book-author">Леся Українка</p>
+                <p class="book-price">320 грн</p>
+            </div>
+
+            <!-- Книга 3 -->
+            <div class="third-section-book">
+                <img src="Book3.jpg" alt="Обкладинка книги 3" class="book-img">
+                <p class="book-title">Тіні забутих предків</p>
+                <p class="book-author">Михайло Коцюбинський</p>
+                <p class="book-price">180 грн</p>
+            </div>
+
+             <!-- Книга 4 -->
+             <div class="third-section-book">
+                <img src="Book4.jpg" alt="Book1.jpg"class="book-img">
+                <p class="book-title">Захар Беркут</p>
+                <p class="book-author">Іван Франко</p>
+                <p class="book-price">290 грн</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Секція Footer -->
+    <footer class="footer">
+        <h2 class="footer-title">Підпишіться на нашу розсилку</h2>
+        <p class="footer-text">Отримуйте новини про нові надходження та акції першими.</p>
+        <form class="footer-form">
+            <label for="email" class="form-title">Ваш Email</label>
+            <input type="email" id="email" class="form-input" placeholder="Введіть ваш email">
+            <button type="submit" class="footer-button">Підписатися</button>
+        </form>
+    </footer>
+
+</body>
+</html>
